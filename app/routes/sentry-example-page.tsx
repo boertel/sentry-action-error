@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/remix";
+
 export default function SentryExamplePage() {
   return (
     <div>
@@ -27,8 +29,22 @@ export default function SentryExamplePage() {
         </h1>
 
         <p>Get started by sending us a sample error:</p>
+
         <form method="post">
-          <button>Submit</button>
+          <button
+            style={{
+              padding: "12px",
+              cursor: "pointer",
+              backgroundColor: "#AD6CAA",
+              borderRadius: "4px",
+              border: "none",
+              color: "white",
+              fontSize: "14px",
+              margin: "18px",
+            }}
+          >
+            Throw error in the action!
+          </button>
         </form>
 
         <button
@@ -47,7 +63,7 @@ export default function SentryExamplePage() {
             throw new Error("Sentry Example Frontend Error");
           }}
         >
-          Throw error!
+          Throw error on the client!
         </button>
 
         <p>
@@ -69,5 +85,12 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
-  throw new Error("Sentry Error");
+  console.log(process.env.VITE_SENTRY_DSN);
+  try {
+    throw new Error("Sentry Error");
+  } catch (error) {
+    console.error(error);
+    //Sentry.captureException(error);
+    throw error;
+  }
 }
