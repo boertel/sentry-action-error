@@ -98,7 +98,7 @@ export function action() {
     throw new Error("Sentry Error");
   } catch (error) {
     console.error(error);
-    //Sentry.captureException(error);
+    Sentry.captureException(error);
     throw error;
   }
 }
