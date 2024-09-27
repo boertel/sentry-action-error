@@ -2,8 +2,11 @@ import * as Sentry from "@sentry/remix";
 import { useLoaderData } from "@remix-run/react";
 
 export function loader() {
+  const dsn = Sentry.getCurrentHub().getClient()?.getDsn();
+  console.log(dsn);
   return {
     dsn: process.env.VITE_SENTRY_DSN,
+    fromHub: dsn,
   };
 }
 
@@ -93,6 +96,7 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
+  console.log(Sentry.getCurrentHub().getClient()?.getDsn());
   console.log(process.env.VITE_SENTRY_DSN);
   try {
     throw new Error("Sentry Error");
