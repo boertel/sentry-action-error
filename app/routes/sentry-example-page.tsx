@@ -1,6 +1,14 @@
 import * as Sentry from "@sentry/remix";
+import { useLoaderData } from "@remix-run/react";
+
+export function loader() {
+  return {
+    dsn: process.env.VITE_SENTRY_DSN,
+  };
+}
 
 export default function SentryExamplePage() {
+  console.log(useLoaderData());
   return (
     <div>
       <main
