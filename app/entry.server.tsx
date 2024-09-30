@@ -22,6 +22,7 @@ export async function handleError(
   );
 
   console.error("entry.server", error instanceof Error, error);
+  console.log("entry.server status", error.status);
   console.log("entry.server isRouteErrorResponse", isRouteErrorResponse(error));
   if (error instanceof Error) {
     await Sentry.captureRemixServerException(
