@@ -34,6 +34,7 @@ export async function handleError(
     isResponse(error) && error.status < 500
   );
   console.log("entry.server aborted?", request.signal.aborted);
+  Sentry.captureException(error);
   if (error instanceof Error) {
     debugger;
     await Sentry.captureRemixServerException(
