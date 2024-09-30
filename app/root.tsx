@@ -44,11 +44,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export const ErrorBoundary = () => {
   const error = useRouteError();
-  captureRemixErrorBoundaryError(error);
+  //captureRemixErrorBoundaryError(error);
   return <div>Something went wrong</div>;
 };
 
 export default function App() {
   return <Outlet />;
 }
-
