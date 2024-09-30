@@ -7,7 +7,12 @@ import * as Sentry from "@sentry/remix";
 
 import { PassThrough } from "node:stream";
 
-import type { AppLoadContext, EntryContext } from "@remix-run/node";
+import type {
+  AppLoadContext,
+  EntryContext,
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
@@ -18,11 +23,17 @@ Sentry.init({
   debug: true,
 });
 
-export const handleError = Sentry.wrapHandleErrorWithSentry(
-  (error, { request }) => {
-    // Custom handleError implementation
+export function handleError(
+  error: unknown,
+  { request }: { request: LoaderFunctionArgs | ActionFunctionArgs }
+) {
+  console.error(error);
+  if (error instanceof Error) {
+    Sentry.captureRemixServerException(error, "remix.server", request, true);
+  } else {
+    Sentry.captureException(error);
   }
-);
+}
 
 const ABORT_DELAY = 5_000;
 
@@ -150,4 +161,3 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
