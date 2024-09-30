@@ -10,7 +10,7 @@ export function loader() {
 }
 
 export default function SentryExamplePage() {
-  console.log(useLoaderData());
+  //console.log(useLoaderData());
   return (
     <div>
       <main
@@ -63,15 +63,6 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
-  Sentry.init({
-    dsn: process.env.VITE_SENTRY_DSN,
-    tracesSampleRate: 1,
-    autoInstrumentRemix: true,
-    debug: true,
-  });
-
-  console.log(global.__SENTRY__);
-
   console.log(Sentry.captureMessage("hello from remix"));
-  return null;
+  throw new Error("Sentry Error");
 }

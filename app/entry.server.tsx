@@ -7,6 +7,11 @@ Sentry.init({
   tracesSampleRate: 1,
   autoInstrumentRemix: true,
   debug: true,
+  enabled: true,
+  beforeSend(event) {
+    console.log("beforeSend", event);
+    return event;
+  },
 });
 
 export function handleError(error: Error, { request }: { request: Request }) {
