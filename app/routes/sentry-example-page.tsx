@@ -68,7 +68,9 @@ export function action() {
     Sentry.getCurrentHub().getClient()?.getDsn(),
     process.env.VITE_SENTRY_DSN
   );
-  console.log("options", Sentry.getCurrentHub().getClient()?.getOptions());
+  const options = Sentry.getCurrentHub().getClient()?.getOptions();
+  console.log("options keys", Object.keys(options));
+  console.log("options", options);
   //try {
   throw new Error("Sentry Error");
   /*
