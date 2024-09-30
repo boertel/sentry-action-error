@@ -24,12 +24,23 @@ export async function handleError(
   console.error("entry.server", error instanceof Error, error);
   console.log("entry.server status", error.status);
   console.log("entry.server isRouteErrorResponse", isRouteErrorResponse(error));
+  const isRemixV2 = true;
+  console.log(
+    "entry.server condition",
+    isRemixV2 && isRouteErrorResponse(error) && error.status < 500
+  );
+  console.log(
+    "entry.server condition2",
+    isResponse(error) && error.status < 500
+  );
+  console.log("entry.server aborted?", request.signal.aborted);
   if (error instanceof Error) {
+    debugger;
     await Sentry.captureRemixServerException(
       error,
       "remix.server",
       request,
-      true
+      isRemixV2
     );
   } else {
     Sentry.captureException(error);
@@ -45,6 +56,18 @@ function isRouteErrorResponse(value: any): value is ErrorResponse {
     typeof error.statusText === "string" &&
     typeof error.internal === "boolean" &&
     "data" in error
+  );
+}
+
+export function isResponse(value: any): value is Response {
+  return (
+    value != null &&
+    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    typeof value.status === "number" &&
+    typeof value.statusText === "string" &&
+    typeof value.headers === "object" &&
+    typeof value.body !== "undefined"
+    /* eslint-enable @typescript-eslint/no-unsafe-member-access */
   );
 }
 
