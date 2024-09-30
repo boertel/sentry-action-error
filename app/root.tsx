@@ -1,6 +1,13 @@
 import { captureRemixErrorBoundaryError } from "@sentry/remix";
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteError,
+} from "@remix-run/react";
+import type { LinksFunction } from "@vercel/remix";
 
 import "./tailwind.css";
 
@@ -44,3 +51,4 @@ export const ErrorBoundary = () => {
 export default function App() {
   return <Outlet />;
 }
+
