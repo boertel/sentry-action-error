@@ -81,13 +81,11 @@ export function action() {
   console.log(Sentry.getCurrentHub().getClient()?.getDsn());
   console.log(Sentry.getCurrentHub().getClient()?.getOptions());
   console.log(process.env.VITE_SENTRY_DSN);
-  //try {
-  throw new Error("Sentry Error");
-  /*
+  try {
+    throw new Error("Sentry Error");
   } catch (error) {
     console.error(error);
     Sentry.captureException(error);
     throw error;
   }
-  */
 }
