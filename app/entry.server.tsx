@@ -11,6 +11,16 @@ export function handleError(
   error: unknown,
   { request }: { request: LoaderFunctionArgs | ActionFunctionArgs }
 ) {
+  console.log(
+    "entry.server dsn",
+    Sentry.getCurrentHub().getClient()?.getDsn(),
+    process.env.VITE_SENTRY_DSN
+  );
+  console.log(
+    "entry.server options",
+    Sentry.getCurrentHub().getClient()?.getOptions()
+  );
+
   console.error("entry.server", error);
   if (error instanceof Error) {
     Sentry.captureRemixServerException(error, "remix.server", request, true);
