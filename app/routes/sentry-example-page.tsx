@@ -63,20 +63,15 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
-  console.log(
-    "dsn",
-    Sentry.getCurrentHub().getClient()?.getDsn(),
-    process.env.VITE_SENTRY_DSN
-  );
-  const options = Sentry.getCurrentHub().getClient()?.getOptions();
-  console.log("options keys", Object.keys(options));
-  /*
-  for (const key in options) {
-    console.log(key, options[key]);
-  }
-  console.log("options", options);
-  */
-  console.log("metadata", options._metadata.sdk.packages);
+  Sentry.init({
+    dsn: process.env.VITE_SENTRY_DSN,
+    tracesSampleRate: 1,
+    autoInstrumentRemix: true,
+    debug: true,
+  });
+
+  console.log(global.__SENTRY__);
+
   console.log(Sentry.captureMessage("hello from remix"));
   return null;
 }
