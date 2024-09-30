@@ -58,20 +58,6 @@ export default function SentryExamplePage() {
         >
           Throw error on the client!
         </button>
-
-        <p>
-          Next, look for the error on the{" "}
-          <a href="https://comedia-design.sentry.io/issues/?project=4507448038981632">
-            Issues Page
-          </a>
-          .
-        </p>
-        <p style={{ marginTop: "24px" }}>
-          For more information, see{" "}
-          <a href="https://docs.sentry.io/platforms/javascript/guides/remix/">
-            https://docs.sentry.io/platforms/javascript/guides/remix/
-          </a>
-        </p>
       </main>
     </div>
   );
