@@ -75,11 +75,11 @@ export function action() {
   }
   console.log("options", options);
   //try {
-  throw new Error("Sentry Error");
+  console.log(Sentry.captureException(new Error("Sentry Errror")));
+  return null;
   /*
   } catch (error) {
     console.error(error);
-    Sentry.captureException(error);
     throw error;
   }
 */
