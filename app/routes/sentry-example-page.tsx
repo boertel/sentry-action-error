@@ -75,7 +75,7 @@ export function action() {
   }
   console.log("options", options);
   //try {
-  console.log(Sentry.captureException(new Error("Sentry Errror")));
+  console.log(Sentry.captureMessage("hello from remix"));
   return null;
   /*
   } catch (error) {
