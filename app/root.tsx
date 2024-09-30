@@ -1,4 +1,4 @@
-import { captureRemixErrorBoundaryError } from "@sentry/remix";
+import { captureRemixErrorBoundaryError, withSentry } from "@sentry/remix";
 import {
   Links,
   Meta,
@@ -48,6 +48,8 @@ export const ErrorBoundary = () => {
   return <div>Something went wrong</div>;
 };
 
-export default function App() {
+function App() {
   return <Outlet />;
 }
+
+export default withSentry(App);
