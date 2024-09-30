@@ -70,6 +70,9 @@ export function action() {
   );
   const options = Sentry.getCurrentHub().getClient()?.getOptions();
   console.log("options keys", Object.keys(options));
+  for (const key in options) {
+    console.log(key, options[key]);
+  }
   console.log("options", options);
   //try {
   throw new Error("Sentry Error");
