@@ -16,6 +16,7 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     sentryVitePlugin({
+      authToken: process.env.SENTRY_AUTH_TOKEN,
       org: "comedia-design",
       project: "coronado",
     }),
@@ -25,4 +26,3 @@ export default defineConfig({
     sourcemap: true,
   },
 });
-
