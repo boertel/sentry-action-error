@@ -70,17 +70,13 @@ export function action() {
   );
   const options = Sentry.getCurrentHub().getClient()?.getOptions();
   console.log("options keys", Object.keys(options));
+  /*
   for (const key in options) {
     console.log(key, options[key]);
   }
   console.log("options", options);
-  //try {
+  */
+  console.log("metadata", options._metadata.sdk.packages);
   console.log(Sentry.captureMessage("hello from remix"));
   return null;
-  /*
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-*/
 }
