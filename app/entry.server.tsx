@@ -37,6 +37,7 @@ export async function handleError(
   );
   console.log("entry.server aborted?", request.signal.aborted);
   Sentry.captureException(error);
+  /*
   if (error instanceof Error) {
     debugger;
     await Sentry.captureRemixServerException(
@@ -48,6 +49,7 @@ export async function handleError(
   } else {
     Sentry.captureException(error);
   }
+  */
 }
 
 function isRouteErrorResponse(value: any): value is ErrorResponse {
