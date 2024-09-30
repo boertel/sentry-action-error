@@ -3,7 +3,6 @@ import { useLoaderData } from "@remix-run/react";
 
 export function loader() {
   const dsn = Sentry.getCurrentHub().getClient()?.getDsn();
-  console.log(dsn);
   return {
     dsn: process.env.VITE_SENTRY_DSN,
     fromHub: dsn,
@@ -64,9 +63,12 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
-  console.log(Sentry.getCurrentHub().getClient()?.getDsn());
-  console.log(Sentry.getCurrentHub().getClient()?.getOptions());
-  console.log(process.env.VITE_SENTRY_DSN);
+  console.log(
+    "dsn",
+    Sentry.getCurrentHub().getClient()?.getDsn(),
+    process.env.VITE_SENTRY_DSN
+  );
+  console.log("options", Sentry.getCurrentHub().getClient()?.getOptions());
   //try {
   throw new Error("Sentry Error");
   /*
