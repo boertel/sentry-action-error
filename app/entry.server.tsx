@@ -7,7 +7,7 @@ Sentry.init({
   debug: true,
 });
 
-export function handleError(
+export async function handleError(
   error: unknown,
   { request }: { request: LoaderFunctionArgs | ActionFunctionArgs }
 ) {
@@ -21,9 +21,14 @@ export function handleError(
     Sentry.getCurrentHub().getClient()?.getOptions()
   );
 
-  console.error("entry.server", error);
+  console.error("entry.server", error instanceof Error, error);
   if (error instanceof Error) {
-    Sentry.captureRemixServerException(error, "remix.server", request, true);
+    await Sentry.captureRemixServerException(
+      error,
+      "remix.server",
+      request,
+      true
+    );
   } else {
     Sentry.captureException(error);
   }
