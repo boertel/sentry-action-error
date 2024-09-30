@@ -22,6 +22,7 @@ export async function handleError(
   );
 
   console.error("entry.server", error instanceof Error, error);
+  console.log("entry.server isRouteErrorResponse", isRouteErrorResponse(error));
   if (error instanceof Error) {
     await Sentry.captureRemixServerException(
       error,
@@ -32,6 +33,18 @@ export async function handleError(
   } else {
     Sentry.captureException(error);
   }
+}
+
+function isRouteErrorResponse(value: any): value is ErrorResponse {
+  const error = value;
+
+  return (
+    error != null &&
+    typeof error.status === "number" &&
+    typeof error.statusText === "string" &&
+    typeof error.internal === "boolean" &&
+    "data" in error
+  );
 }
 
 export default async function (
