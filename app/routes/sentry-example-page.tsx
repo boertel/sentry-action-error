@@ -63,6 +63,18 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
-  console.log(Sentry.captureMessage("hello from remix"));
-  throw new Error("Sentry Error");
+  const transport = Sentry.getClient()?.getTransport()
+  if (transport) {
+  const ogTransportSend = transport.send;
+  console.log(ogTransportSend)
+    
+    transport.send = function (...args) {
+      console.log("ogTransportSend", JSON.stringify(args, null, 2));
+      return ogTransportSend(...args);
+    };
+  }
+  
+  //console.log(Sentry.getClient());
+  Sentry.captureMessage("hello from remix");
+  //throw new Error("Sentry Error");
 }

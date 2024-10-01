@@ -6,10 +6,10 @@ Sentry.init({
   dsn: process.env.VITE_SENTRY_DSN,
   tracesSampleRate: 1,
   autoInstrumentRemix: true,
-  debug: true,
+  //debug: true,
   enabled: true,
   beforeSend(event) {
-    console.log("beforeSend", event);
+    //console.log("beforeSend", event);
     return event;
   },
 });
