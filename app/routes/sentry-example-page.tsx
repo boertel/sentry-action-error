@@ -63,18 +63,21 @@ export default function SentryExamplePage() {
 }
 
 export function action() {
-  const transport = Sentry.getClient()?.getTransport()
+  const client = Sentry.getClient();
+  console.log(client);
+
+  const transport = Sentry.getClient()?.getTransport();
   if (transport) {
-  const ogTransportSend = transport.send;
-  console.log(ogTransportSend)
-    
+    const ogTransportSend = transport.send;
+    //console.log(ogTransportSend)
+
     transport.send = function (...args) {
-      console.log("ogTransportSend", JSON.stringify(args, null, 2));
+      //console.log("ogTransportSend", JSON.stringify(args, null, 2));
+      console.log("send");
       return ogTransportSend(...args);
     };
   }
-  
-  //console.log(Sentry.getClient());
-  Sentry.captureMessage("hello from remix");
+
+  //console.log(Sentry.getClient())  Sentry.captureMessage("hello from remix");
   //throw new Error("Sentry Error");
 }
