@@ -63,11 +63,5 @@ export default function SentryExamplePage() {
 }
 
 export async function action() {
-  console.log(
-    await fetch(
-      `https://o165962.ingest.us.sentry.io/api/4508042589503488/envelope/?sentry_key=a9845cc3e9421f92cdc027a9af33fd0c&sentry_version=7&sentry_client=sentry.javascript.remix%2F8.32.0`,
-      { method: "POST" }
-    )
-  );
   throw new Error("Sentry Error");
 }
