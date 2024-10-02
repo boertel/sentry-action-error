@@ -70,8 +70,10 @@ export async function action() {
       { method: "POST" }
     )
   );
+  /*
   const client = Sentry.getClient();
   //console.log(client);
+
 
   const transport = Sentry.getClient()?.getTransport();
   if (transport) {
@@ -86,5 +88,6 @@ export async function action() {
   }
 
   //console.log(Sentry.getClient())  Sentry.captureMessage("hello from remix");
-  //throw new Error("Sentry Error");
+  */
+  throw new Error("Sentry Error");
 }
