@@ -45,6 +45,7 @@ Sentry.init({
 export function handleError(error: Error, { request }: { request: Request }) {
   console.error("handleError", error);
   const transport = Sentry.getClient()?.getTransport();
+  console.log("transport", transport);
   if (transport) {
     const _transport = transport.send;
 
