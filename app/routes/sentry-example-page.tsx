@@ -69,6 +69,14 @@ export async function action() {
       { method: "POST" }
     )
   );
-  Sentry.captureException(new Error("Sentry Example Backend Error"));
+  const transport = Sentry.getClient()?.getTransport();
+  if (transport) {
+    const _transport = transport.send;
+
+    transport.send = function (...args) {
+      console.log("send");
+      return _transport(...args);
+    };
+  }
   throw new Error("Sentry Error");
 }
