@@ -12,7 +12,7 @@ function makeFetchTransport(options) {
       headers: options.headers,
       ...options.fetchOptions,
     };
-    console.log("request options", options.url, request);
+    //console.log("request options", options.url, request.body);
 
     return fetch(options.url, requestOptions).then((response) => {
       console.log("response", response.status);
@@ -31,14 +31,14 @@ function makeFetchTransport(options) {
 
 Sentry.init({
   dsn: process.env.VITE_SENTRY_DSN,
-  //transport: makeFetchTransport,
+  transport: makeFetchTransport,
   sampleRate: 1.0,
   tracesSampleRate: 1,
   autoInstrumentRemix: true,
   //debug: true,
   enabled: true,
   beforeSend(event) {
-    console.log("beforeSend");
+    console.log("beforeSend", event.event_id);
     return event;
   },
 });
@@ -46,12 +46,13 @@ Sentry.init({
 export function handleError(error: Error, { request }: { request: Request }) {
   console.error("handleError", error);
   const transport = Sentry.getClient()?.getTransport();
-  console.log("transport", transport);
+  //console.log("transport", transport);
   if (transport) {
     const _transport = transport.send;
 
     transport.send = function (...args) {
-      console.log("send");
+      const evt = args[0][0];
+      console.log("send", evt);
       return _transport(...args);
     };
   }
