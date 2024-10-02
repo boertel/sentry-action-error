@@ -2,6 +2,7 @@ import { RemixServer } from "@remix-run/react";
 import { handleRequest, type EntryContext } from "@vercel/remix";
 import * as Sentry from "@sentry/remix";
 import { createTransport } from "@sentry/core";
+import { waitUntil } from "@vercel/functions";
 
 function makeFetchTransport(options) {
   async function makeRequest(request) {
@@ -57,6 +58,7 @@ export function handleError(error: Error, { request }: { request: Request }) {
     };
   }
   Sentry.captureRemixServerException(error, "remix.server", request, true);
+  waitUntil(Sentry.flush());
 }
 
 export default async function (
