@@ -63,28 +63,5 @@ export default function SentryExamplePage() {
 }
 
 export async function action() {
-  console.log(
-    "ingest",
-    await fetch(
-      `https://o165962.ingest.us.sentry.io/api/4508042589503488/envelope/?sentry_key=a9845cc3e9421f92cdc027a9af33fd0c&sentry_version=7&sentry_client=sentry.javascript.remix%2F8.32.0`,
-      { method: "POST" }
-    )
-  );
-  const client = Sentry.getClient();
-  //console.log(client);
-
-  const transport = Sentry.getClient()?.getTransport();
-  if (transport) {
-    const ogTransportSend = transport.send;
-    //console.log(ogTransportSend)
-
-    transport.send = function (...args) {
-      //console.log("ogTransportSend", JSON.stringify(args, null, 2));
-      console.log("send");
-      return ogTransportSend(...args);
-    };
-  }
-
-  //console.log(Sentry.getClient())  Sentry.captureMessage("hello from remix");
   throw new Error("Sentry Error");
 }
