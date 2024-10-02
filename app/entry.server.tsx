@@ -31,7 +31,7 @@ function makeFetchTransport(options) {
 
 Sentry.init({
   dsn: process.env.VITE_SENTRY_DSN,
-  transport: makeFetchTransport,
+  //transport: makeFetchTransport,
   sampleRate: 1.0,
   tracesSampleRate: 1,
   autoInstrumentRemix: true,
