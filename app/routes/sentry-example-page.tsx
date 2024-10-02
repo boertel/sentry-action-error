@@ -64,7 +64,7 @@ export default function SentryExamplePage() {
 
 export function action() {
   const client = Sentry.getClient();
-  console.log(client);
+  //console.log(client);
 
   const transport = Sentry.getClient()?.getTransport();
   if (transport) {
