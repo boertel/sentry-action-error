@@ -63,5 +63,6 @@ export default function SentryExamplePage() {
 }
 
 export async function action() {
+  Sentry.captureException(new Error("Sentry Example Backend Error"));
   throw new Error("Sentry Error");
 }
