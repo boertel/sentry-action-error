@@ -12,10 +12,10 @@ function makeFetchTransport(options) {
       headers: options.headers,
       ...options.fetchOptions,
     };
-    console.log("request options", options.url, request.body);
+    console.log("request options", options.url, request);
 
     return fetch(options.url, requestOptions).then((response) => {
-      console.log("response", response);
+      console.log("response", response.status);
       return {
         statusCode: response.status,
         headers: {
