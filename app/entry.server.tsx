@@ -43,6 +43,7 @@ Sentry.init({
 });
 
 export function handleError(error: Error, { request }: { request: Request }) {
+  console.error("handleError", error);
   Sentry.captureRemixServerException(error, "remix.server", request, true);
 }
 
