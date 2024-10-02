@@ -44,6 +44,15 @@ Sentry.init({
 
 export function handleError(error: Error, { request }: { request: Request }) {
   console.error("handleError", error);
+  const transport = Sentry.getClient()?.getTransport();
+  if (transport) {
+    const _transport = transport.send;
+
+    transport.send = function (...args) {
+      console.log("send");
+      return _transport(...args);
+    };
+  }
   Sentry.captureRemixServerException(error, "remix.server", request, true);
 }
 

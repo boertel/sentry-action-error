@@ -69,14 +69,5 @@ export async function action() {
       { method: "POST" }
     )
   );
-  const transport = Sentry.getClient()?.getTransport();
-  if (transport) {
-    const _transport = transport.send;
-
-    transport.send = function (...args) {
-      console.log("send");
-      return _transport(...args);
-    };
-  }
   throw new Error("Sentry Error");
 }
