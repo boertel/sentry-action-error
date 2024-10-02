@@ -38,7 +38,7 @@ Sentry.init({
   //debug: true,
   enabled: true,
   beforeSend(event) {
-    //console.log("beforeSend", event);
+    console.log("beforeSend");
     return event;
   },
 });
