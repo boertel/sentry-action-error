@@ -1,4 +1,12 @@
+import * as Sentry from "@sentry/remix";
+
 export function action() {
+  const client = Sentry.getCurrentHub().getClient();
+  if (client) {
+    console.log("dsn", client.getDsn());
+  } else {
+    console.log("no sentry client found");
+  }
   throw new Error("Error from action");
 }
 
