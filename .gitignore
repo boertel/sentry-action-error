@@ -1,12 +1,8 @@
 node_modules
 
-/.cache
 /build
 .env
+.vercel
 
 # Sentry Config File
 .env.sentry-build-plugin
-
-public/build
-.vercel
-.vscode
