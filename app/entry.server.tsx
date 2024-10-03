@@ -16,7 +16,7 @@ Sentry.init({
 
 export const handleError = Sentry.wrapHandleErrorWithSentry(
   (error, { request }) => {
-    //waitUntil(Sentry.flush());
+    waitUntil(Sentry.flush());
   }
 );
 
