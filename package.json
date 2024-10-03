@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "sentry-action-error",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -15,6 +15,7 @@
     "@sentry/remix": "^8.33.1",
     "@sentry/vite-plugin": "^2.22.5",
     "@vercel/analytics": "^1.2.2",
+    "@vercel/functions": "^1.4.1",
     "@vercel/remix": "2.10.0",
     "isbot": "^4",
     "react": "^18.2.0",

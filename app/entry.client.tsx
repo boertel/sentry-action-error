@@ -4,21 +4,24 @@ import { startTransition, StrictMode, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 
 Sentry.init({
-    dsn: "https://a9845cc3e9421f92cdc027a9af33fd0c@o165962.ingest.us.sentry.io/4508042589503488",
-    tracesSampleRate: 1,
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  tracesSampleRate: 1,
 
-    integrations: [Sentry.browserTracingIntegration({
+  integrations: [
+    Sentry.browserTracingIntegration({
       useEffect,
       useLocation,
-      useMatches
-    }), Sentry.replayIntegration({
-        maskAllText: true,
-        blockAllMedia: true
-    })],
+      useMatches,
+    }),
+    Sentry.replayIntegration({
+      maskAllText: true,
+      blockAllMedia: true,
+    }),
+  ],
 
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1
-})
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1,
+});
 
 startTransition(() => {
   hydrateRoot(
@@ -28,3 +31,4 @@ startTransition(() => {
     </StrictMode>
   );
 });
+

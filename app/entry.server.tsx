@@ -6,10 +6,11 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import * as isbotModule from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import { waitUntil } from "@vercel/functions";
 
 export const handleError = Sentry.wrapHandleErrorWithSentry(
   (error, { request }) => {
-    // Custom handleError implementation
+    //waitUntil(Sentry.flush());
   }
 );
 
@@ -160,4 +161,3 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
