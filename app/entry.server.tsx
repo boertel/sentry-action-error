@@ -8,6 +8,12 @@ import * as isbotModule from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 import { waitUntil } from "@vercel/functions";
 
+Sentry.init({
+  dsn: process.env.VITE_SENTRY_DSN,
+  tracesSampleRate: 1,
+  autoInstrumentRemix: true,
+});
+
 export const handleError = Sentry.wrapHandleErrorWithSentry(
   (error, { request }) => {
     //waitUntil(Sentry.flush());
